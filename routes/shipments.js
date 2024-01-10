@@ -9,7 +9,7 @@ const shipitSchema = require('../schema.json')
 
 const { shipProduct } = require("../shipItApi");
 
-/** POST /ship
+/** POST '/'
  *
  * Validates and ships an order coming from json body:
  *   { productId, name, addr, zip }
@@ -17,10 +17,9 @@ const { shipProduct } = require("../shipItApi");
  * Returns { shipped: shipId }
  */
 
-router.post("/ship", async function (req, res, next) {
+router.post("/", async function (req, res, next) {
   const result = jsonschema.validate(
     req.body, shipitSchema, {required: true});
-    console.log("req.body=", req.body)
 
   if (!result.valid){
     const errs = result.errors.map(err => err.stack);

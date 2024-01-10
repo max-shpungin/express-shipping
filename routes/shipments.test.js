@@ -22,4 +22,20 @@ describe("POST /", function () {
       .send();
     expect(resp.statusCode).toEqual(400);
   });
+
+  test("it returns json in case of error", async function(){
+    const resp = await request(app)
+      .post("/shipments")
+      .send({
+        productId: 1045,
+        name: "storm",
+        addr: "east coast",
+        zip: "12345"
+      });
+
+    expect(resp.body).toEqual({ "error" : {
+      "message" : ['instance.addr does not match pattern \"^[1-9].+[a-zA-Z]$\"'],
+      "status" : 400
+    } });
+  })
 });

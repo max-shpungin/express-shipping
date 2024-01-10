@@ -17,9 +17,14 @@ const { shipProduct } = require("../shipItApi");
  * Returns { shipped: shipId }
  */
 
-router.post("/", async function (req, res, next) {
-  if (req.body === undefined) {
-    throw new BadRequestError();
+router.post("/ship", async function (req, res, next) {
+  const result = jsonschema.validate(
+    req.body, shipitSchema, {required: true});
+    console.log("req.body=", req.body)
+
+  if (!result.valid){
+    const errs = result.errors.map(err => err.stack);
+    throw new BadRequestError(errs);
   }
   const { productId, name, addr, zip } = req.body;
   const shipId = await shipProduct({ productId, name, addr, zip });

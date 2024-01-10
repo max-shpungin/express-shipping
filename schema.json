@@ -1,8 +1,3 @@
-productId: an integer number that is equal to our greater than 1000.
-name: a string for the customer name
-addr: an mailing address line (like 123 Main Street)
-zip: a string for the zipcode
-
 {
   "$schema" : "http://json-schema.org/draft-07/schema#",
   "$id" : "http://shipitdummy.com/shipit.schema.json",
@@ -18,6 +13,12 @@ zip: a string for the zipcode
       "type" : "string",
       "pattern" : "^[0-9].[a-zA-Z]$"},
     "zip" : {"type" : "string"}
-  }
-
+  },
+  "additionalProperties" : false,
+  "required": [
+    "productId",
+    "name",
+    "addr",
+    "zip"
+  ]
 }

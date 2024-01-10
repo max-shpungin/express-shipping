@@ -11,7 +11,7 @@ const { shipProduct } = require("../shipItApi");
 
 /** POST /ship
  *
- * VShips an order coming from json body:
+ * Validates and ships an order coming from json body:
  *   { productId, name, addr, zip }
  *
  * Returns { shipped: shipId }
